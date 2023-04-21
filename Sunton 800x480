@@ -1,0 +1,709 @@
+#ALL plates pull from this directory.  just change the plate name below to add another plate
+#Sunton 800x480
+plate02:
+  objects:
+    - obj: "p0b4"
+      properties:
+        "val": "{{states('openhasp.plate02') | int(0) -1}}"
+    - obj: "p0b5"
+      properties:
+        "text_color": "white"
+        "text": "{{state_attr('weather.keul_daynight','temperature')}}°F"
+
+    - obj: "p0b6" #time display
+      properties:
+        "text": "{{ states('sensor.time12h')}}"   
+
+    - obj: "p0b7"
+      properties:
+          "text_color": "{% if -50 <= state_attr('openhasp.plate02','rssi') | int(0) %}green{% elif -51 > state_attr('openhasp.plate02','rssi') | int(0) >= -60 %}olive{% elif -61 > state_attr('openhasp.plate02','rssi') | int(0) >= -70 %}orange{% elif -71 > state_attr('openhasp.plate02','rssi') |int (0) >= -80 %}maroon{% else %}red{% endif %}"
+      
+    - obj: "p0b9" # temp Thermometer display
+      properties:
+        "text_color": "{% if state_attr('weather.keul_daynight','temperature') |int <= 30  %}yellow
+        {% elif 30 < state_attr('weather.keul_daynight','temperature') |int <= 40  %}blue
+        {% elif 40 < state_attr('weather.keul_daynight','temperature') |int <= 90 %}green
+        {% else %}red{% endif %}"
+
+    - obj: "p1b2"
+      properties:
+        "value_color": >
+          {% if states('binary_sensor.solivia_night_status') == 'on' %}#F0E68C{% else %}#FFFF00{% endif %}
+        "value_str": >
+          {% if states('binary_sensor.solivia_night_status') == 'on' %}{{'\ue594'}}{% else %}{{'\ue599'}}{% endif %}
+        "val": "{{ states('sensor.pv_power_3') | int(0) }}"
+    - obj: "p1b5"
+      properties:
+        "text": "{{ states('sensor.pv_power_3') | int(0) }} W"
+        "text_color": "{% if 500 > states('sensor.pv_power_3') | int(0) %}red{% elif 1000 > states('sensor.pv_power_3') | int(0) >= 500 %}orange{% elif 1500 > states('sensor.pv_power_3') |int (0) >= 1000 %}yellow{% else %}lime{% endif %}"
+    - obj: "p1b3"
+      properties:
+        "val": "{{ states('sensor.load_power_2') | int(0) }}"
+    - obj: "p1b4"
+      properties:
+        "text": "{{ states('sensor.load_power_2') | int(0) }} W"
+        "text_color": "{% if 0 > states('sensor.load_power_2') | int(0) %}lime{% elif 750 > states('sensor.load_power_2') | int(0) >= 0 %}yellow{% elif 1500 > states('sensor.load_power_2') |int (0) >= 750 %}orange{% else %}red{% endif %}"
+    - obj: "p1b10" # Inverter internal Temps
+      properties:
+        "text": "{{ (states('sensor.temperature') | float(0.001) ) | round(0) }}°C"
+    - obj: "p1b11"
+      properties:
+        "text": "{{ states('sensor.battery_state_of_charge') | float(0) | round(0) }}%"
+    - obj: "p1b12"
+      properties:
+        "text": "\ue054{{ states('sensor.battery_power') | float(0) | round(0) }}W"
+    - obj: "p1b13"
+      properties:
+        "text": "{{ states('sensor.grid_power_2') | float(0)  / 1000 | round(0) }} kW"
+    # - obj: "p1b13"
+    #   properties:
+    #     "text": "wtf kW"
+
+    - obj: "p1b20"
+      properties:
+        "text": "temp"
+    - obj: "p1b40"
+      properties:
+        "max": "{{ states('sensor.energy_production_today') | float(0.001) * 1000 }}"
+        "val": "{{ states('sensor.solar_daily_yield') | int(0) }}"
+    - obj: "p1b41"
+      properties:
+        "max": "{{ (states('sensor.daily_energy_export_total') | float(0.001) * 1000 + states('sensor.daily_energy_import_total') | float(1) * 1000) | int(0) }}"
+        "val": "{{ (states('sensor.daily_energy_export_total') | float(0.001) * 1000) | int(0) }}"
+    - obj: "p1b42"
+      properties:
+        "max": "{{ (states('sensor.daily_energy_import_total') | float(0.001) * 1000 + states('sensor.daily_solar_consumption_total') | float *1000) | int(0) }}"
+        "val": "{{ (states('sensor.daily_solar_consumption_total') | float(0.001) * 1000) | int(0) }}"
+
+#
+#
+#Media Player
+#
+    - obj: "p2b14" # artist label
+      properties:
+        "text": "{{ state_attr('media_player.kitchen_original','media_artist') if state_attr('media_player.kitchen_original','media_artist') else '-' }}"
+
+    - obj: "p2b15" # title label
+      properties:
+        "text": "{{ state_attr('media_player.kitchen_original','media_title') if state_attr('media_player.kitchen_original','media_title') else '-' }}"
+
+    # - obj: "p3b15" # sources list
+    #   properties:
+    #     "options": >
+    #       {% if (state_attr('media_player.kitchen_original','source_list') != none and states('media_player.kitchen_original') not in ['unavailable', 'unknown']) %}
+    #       {{"(no source)\n"|e}}
+    #       {%- for source in state_attr('media_player.kitchen_original','source_list') -%}
+    #       {{source+"\n"|e}}{%-if not loop.last%}{%-endif%}{%-endfor%}{%-endif %}
+    #     "val": >
+    #       {% if states('media_player.kitchen_original') not in ['unavailable', 'unknown'] %}
+    #       {% if state_attr('media_player.kitchen_original','source') == None %}0{% else %}
+    #       {%for source in state_attr('media_player.kitchen_original','source_list')%}
+    #       {{loop.index if source == state_attr('media_player.kitchen_original','source') }}
+    #       {%-endfor%}{%-endif %}{%-endif %}
+    #     "click": "{{ 'false' if states('media_player.kitchen_original') in ['unavailable', 'unknown'] else 'true' }}"
+    #   event:
+    #     "changed":
+    #       - service: media_player.select_source
+    #         data:
+    #           entity_id: media_player.kitchen_original
+    #           source: "{{ text }}"
+
+    # - obj: "p3b16" # sound modes list
+    #   properties:
+    #     "options": >
+    #       {% if (state_attr('media_player.kitchen_original','sound_mode_list') != none and states('media_player.kitchen_original') not in ['unavailable', 'unknown']) %}
+    #       {%-for soundmode in state_attr('media_player.kitchen_original','sound_mode_list')-%}
+    #       {{soundmode+"\n"|e}}{%-if not loop.last%}{%-endif%}{%-endfor%}{%-endif %}
+    #     "val": >
+    #       {% if states('media_player.kitchen_original') not in ['unavailable', 'unknown'] %}{%for source in state_attr('media_player.kitchen_original','sound_mode_list')%}
+    #       {{loop.index -1 if source == state_attr('media_player.kitchen_original','sound_mode') }}
+    #       {%-endfor%}{% endif %}
+    #     "click": "{{ 'false' if states('media_player.kitchen_original') in ['unavailable', 'unknown'] else 'true' }}"
+    #   event:
+    #     "changed":
+    #       - service: media_player.select_sound_mode
+    #         data:
+    #           entity_id: media_player.kitchen_original
+    #           sound_mode: "{{ text }}"
+
+    - obj: "p2b17" # play/pause/stop
+      properties:
+        "text": >
+          {% if is_state('media_player.kitchen_original', 'playing') %}
+          {{ "\uE3E4" | e }}
+          {%-else %}
+          {{ "\uE40A" | e }}
+          {%-endif %}
+        "text_opa": "{{ '80' if states('media_player.kitchen_original') in ['unavailable', 'unknown'] else '255' }}"
+      event:
+        "down":
+          - service: media_player.media_play_pause
+            target:
+              entity_id: media_player.kitchen_original
+        "long":
+          - service: media_player.media_stop
+            target:
+              entity_id: media_player.kitchen_original
+
+    - obj: "p2b16" # prev
+      properties:
+        "text_opa": "{{ '80' if states('media_player.kitchen_original') in ['unavailable', 'unknown'] else '255' }}"
+      event:
+        "down":
+          - service: media_player.media_previous_track
+            target:
+              entity_id: media_player.kitchen_original
+
+    - obj: "p2b18" # next
+      properties:
+        "text_opa": "{{ '80' if states('media_player.kitchen_original') in ['unavailable', 'unknown'] else '255' }}"
+      event:
+        "down":
+          - service: media_player.media_next_track
+            target:
+              entity_id: media_player.kitchen_original
+
+    - obj: "p2b20" # volume slider
+      properties:
+        "val": >
+          {% if (state_attr('media_player.kitchen_original','volume_level') != none and states('media_player.kitchen_original') not in ['unavailable', 'unknown']) %}
+          {{ state_attr('media_player.kitchen_original','volume_level') * 100 | int(default=40) }}
+          {%-endif %}
+        "click": "{{ 'false' if states('media_player.kitchen_original') in ['unavailable', 'unknown'] else 'true' }}"
+      event:
+        "changed":
+          - service: media_player.volume_set
+            data:
+              entity_id: media_player.kitchen_original
+              volume_level: "{{ val | int / 100 }}"
+        "up":
+          - service: media_player.volume_set
+            data:
+              entity_id: media_player.kitchen_original
+              volume_level: "{{ val | int / 100 }}"
+
+    # - obj: "p3b21" # power
+    #   properties:
+    #     "text_color": "{{ '#B00000' if states('media_player.kitchen_original') == 'off' else '#FFFFFF' }}"
+    #     "text_opa": "{{ '80' if states('media_player.kitchen_original') in ['unavailable', 'unknown'] else '255' }}"
+    #   event:
+    #     "down":
+    #       - service: media_player.toggle
+    #         data:
+    #           entity_id: media_player.kitchen_original
+
+    # - obj: "p3b22" # repeat
+    #   properties:
+    #     "text": >
+    #       {% if is_state_attr('media_player.kitchen_original', 'repeat', 'one') %}
+    #       {{ "\uE458" | e }}
+    #       {% elif is_state_attr('media_player.kitchen_original', 'repeat', 'all') %}
+    #       {{ "\uE456" | e }}
+    #       {%-else %}
+    #       {{ "\uE457" | e }}
+    #       {%-endif %}
+    #     "text_opa": "{{ '80' if states('media_player.kitchen_original') in ['unavailable', 'unknown'] else '255' }}"
+    #   event:
+    #     "down":
+    #       - service: media_player.repeat_set
+    #         data:
+    #           entity_id: media_player.kitchen_original
+    #           repeat: >
+    #             {% if is_state_attr('media_player.kitchen_original', 'repeat', 'one') %}
+    #             all
+    #             {% elif is_state_attr('media_player.kitchen_original', 'repeat', 'all') %}
+    #             off
+    #             {% elif is_state_attr('media_player.kitchen_original', 'repeat', 'off') %}
+    #             one
+    #             {%-endif %}
+
+    # - obj: "p3b23" # shuffle
+    #   properties:
+    #     "text": >
+    #       {% if state_attr('media_player.kitchen_original', 'shuffle') %}
+    #       {{ "\uE49D" | e }}
+    #       {%-else %}
+    #       {{ "\uE49E" | e }}
+    #       {%-endif %}
+    #     "text_opa": "{{ '80' if states('media_player.kitchen_original') in ['unavailable', 'unknown'] else '255' }}"
+    #   event:
+    #     "down":
+    #       - service: media_player.shuffle_set
+    #         data:
+    #           entity_id: media_player.kitchen_original
+    #           shuffle:  >
+    #             {% if state_attr('media_player.kitchen_original', 'shuffle') %}
+    #             false
+    #             {% else %}
+    #             true
+    #             {%-endif %}
+
+    - obj: "p2b24" # mute
+      properties:
+        "text": >
+          {% if state_attr('media_player.kitchen_original', 'is_volume_muted') %}
+          {{ "\uE75F" | e }}
+          {%-else %}
+          {{ "\uE57E" | e }}
+          {%-endif %}
+        "text_opa": "{{ '80' if states('media_player.kitchen_original') in ['unavailable', 'unknown'] else '255' }}"
+      event:
+        "down":
+          - service: media_player.volume_mute
+            data:
+              entity_id: media_player.kitchen_original
+              is_volume_muted:  >
+                {% if state_attr('media_player.kitchen_original', 'is_volume_muted') %}
+                false
+                {% else %}
+                true
+                {%-endif %}
+# Thermostat
+    - obj: "p3b89"  # status message
+      properties:
+        "text": >
+          {% if states('sensor.house_stove_error_code') == '0'  %}
+              {% if states('sensor.house_display_text_sensor') == 'Switching OFF' %}
+              Turning off          
+              {%-elif states('sensor.house_display_text_sensor') == 'Lighting' %}
+              Lighting
+              {%-elif states('sensor.house_display_text_sensor') == 'Cleaning' %}
+              Cleaning
+              {%-elif state_attr('climate.house_wood_pellet_stove','hvac_action') == 'heating' %}
+              Heating
+              {%-elif state_attr('climate.house_wood_pellet_stove','hvac_action') == 'idle' %}
+              Idling 
+              {%-elif is_state('climate.house_wood_pellet_stove', 'off') %}
+              Off 
+              {% endif %}
+          {%-else %}
+            *Error* 
+          {% endif %}
+
+    - obj: "p3b90"  # arc slider
+      properties:
+        "val": >
+          {% if state_attr('climate.house_wood_pellet_stove','temperature') is not none %}
+          {{ state_attr('climate.house_wood_pellet_stove','temperature') | int * 10 }}
+          {%- endif %}
+        "min": >
+          {% if state_attr('climate.house_wood_pellet_stove','min_temp') is not none %}
+          {{ state_attr('climate.house_wood_pellet_stove','min_temp') | int * 10 }}
+          {%- endif %}
+        "max": >
+          {% if state_attr('climate.house_wood_pellet_stove','max_temp') is not none %}
+          {{ state_attr('climate.house_wood_pellet_stove','max_temp') | int * 10 }}
+          {%- endif %}
+        "line_count": "8"
+        "label_count": "8"
+        "opacity": "{{ 60 if (is_state('climate.house_wood_pellet_stove','unavailable') or is_state('climate.house_wood_pellet_stove','unknown')) else 255 }}"
+        "click": "{{ 'false' if (is_state('climate.house_wood_pellet_stove','unavailable') or is_state('climate.house_wood_pellet_stove','unknown')) else 'true' }}"
+        "line_color1": >
+          {% if is_state('climate.house_wood_pellet_stove', 'cool') %}
+          {{ "#346beb" }}
+          {%-elif is_state('climate.house_wood_pellet_stove', 'heat_cool') %}
+          {{ "#34bdeb" }}
+          {%-elif is_state('climate.house_wood_pellet_stove', 'heat') %}
+          {{ "#eb3434" }}
+          {%-elif is_state('climate.house_wood_pellet_stove', 'dry') %}
+          {{ "#ebeb34" }}
+          {%-elif is_state('climate.house_wood_pellet_stove', 'fan_only') %}
+          {{ "#34eb77" }}
+          {%-else %}
+          {{ "#9f96b0" }}
+          {% endif %}
+      event:
+        "changed":
+          - service: climate.set_temperature
+            target:
+              entity_id: climate.house_wood_pellet_stove
+            data:
+              temperature: "{{ val | int / 10 }}"
+        "up":
+          - service: climate.set_temperature
+            target:
+              entity_id: climate.house_wood_pellet_stove
+            data:
+              temperature: "{{ val | int / 10 }}"
+
+    - obj: "p3b96"  # gauge current temp, numbers around the inner circle
+      properties:
+        "val": "{{states('sensor.living_room_sensor_temp') | round(1,default=0) * 10 }}" 
+           # >
+#          {% if not (is_state('sensor.bedroom_bme680_temperature','unavailable') or is_state('sensor.bedroom_bme680_temperature','unknown')) %}
+#           {{ states('sensor.bedroom_bme680_temperature') | float (default=0) * 10 }}
+#          {%- endif %}
+        "min": >
+          {% if state_attr('climate.house_wood_pellet_stove','min_temp') is not none %}
+          {{ state_attr('climate.house_wood_pellet_stove','min_temp') | int * 10 }}
+          {%- endif %}
+        "max": >
+          {% if state_attr('climate.house_wood_pellet_stove','max_temp') is not none %}
+          {{ state_attr('climate.house_wood_pellet_stove','max_temp') | int * 10 }}
+          {%- endif %}
+        "critical_value": >
+          {% if state_attr('climate.house_wood_pellet_stove','max_temp') is not none %}
+          {{ state_attr('climate.house_wood_pellet_stove','max_temp') | int * 10 + 1 }}
+          {%- endif %}
+        "label_count": >
+          {% if state_attr('climate.house_wood_pellet_stove','max_temp') is not none %}
+          {{ state_attr('climate.house_wood_pellet_stove','max_temp') | int - state_attr('climate.house_wood_pellet_stove','min_temp') | int + 1 }}
+          {%- endif %}
+        "line_count": >
+          {% if state_attr('climate.house_wood_pellet_stove','max_temp') is not none %}
+          {{ (state_attr('climate.house_wood_pellet_stove','max_temp') | int - state_attr('climate.house_wood_pellet_stove','min_temp') | int) * 2 + 1 }}
+          {%- endif %}
+        "opacity": "{{ 60 if (is_state('climate.house_wood_pellet_stove','unavailable') or is_state('climate.house_wood_pellet_stove','unknown')) else 255 }}"
+
+    - obj: "p3b88"  # label current temp (and +/- with short/long touch)
+      properties:
+        "text": >
+          {% if (is_state('sensor.living_room_sensor_temp','unavailable') or is_state('sensor.living_room_sensor_temp','unknown')) %}
+          {{ "--.-" }}
+          {%-else %}
+          {{ states('sensor.living_room_sensor_temp') | round(1,default=0) }}
+          {%- endif %}
+        "click": "{{ 'false' if (is_state('climate.house_wood_pellet_stove','unavailable') or is_state('climate.house_wood_pellet_stove','unknown')) else 'true' }}"
+        "opacity": "{{ 60 if (is_state('climate.house_wood_pellet_stove','unavailable') or is_state('climate.house_wood_pellet_stove','unknown')) else 255 }}"
+      event:
+        "up":
+          - service: climate.set_temperature
+            target:
+              entity_id: climate.house_wood_pellet_stove
+            data:
+              temperature: "{{ state_attr('climate.house_wood_pellet_stove','temperature') + 1 | float(default=1)}}" 
+        "long":
+          - service: climate.set_temperature
+            target:
+              entity_id: climate.house_wood_pellet_stove
+            data:
+              temperature: "{{ state_attr('climate.house_wood_pellet_stove','temperature') - 1 | float(default=1)}}" 
+
+    - obj: "p3b96"  # label target temp
+      properties:
+        "line_count": "17"
+        "label_count": "9"
+
+    - obj: "p3b95"  # label target temp
+      properties:
+        "text": >
+          {% if state_attr('climate.house_wood_pellet_stove','temperature') is not none %}
+          {{ state_attr('climate.house_wood_pellet_stove','temperature') }}
+          {%- endif %}
+        "opacity": "{{ 60 if (is_state('climate.house_wood_pellet_stove','unavailable') or is_state('climate.house_wood_pellet_stove','unknown')) else 255 }}"
+
+
+    - obj: "p3b91"  # on/off switch
+      properties:
+        "val": "{{ 0 if (is_state('climate.house_wood_pellet_stove', 'off') or is_state('climate.house_wood_pellet_stove', 'unavailable')) else 1 }}"
+        "click": "{{ 'false' if (is_state('climate.house_wood_pellet_stove','unavailable') or is_state('climate.house_wood_pellet_stove','unknown')) else 'true' }}"
+        "opacity": "{{ 60 if (is_state('climate.house_wood_pellet_stove','unavailable') or is_state('climate.house_wood_pellet_stove','unknown')) else 255 }}"
+      event:
+        "down":
+          - service_template: >
+              {% if val == 0 -%}
+              climate.turn_on
+              {% else -%}
+              climate.turn_off
+              {% endif -%}
+            entity_id: "climate.house_wood_pellet_stove"
+
+    - obj: "p3b87"  # on/off switch
+      properties:
+        "val": "{{ 0 if (is_state('switch.house_thumbsup_reset', 'off') or is_state('switch.house_thumbsup_reset', 'unavailable')) else 1 }}"
+        # "click": "{{ 'false' if (is_state('switch.house_thumbsup_reset','unavailable') or is_state('switch.house_thumbsup_reset','unknown')) else 'true' }}"
+        "opacity": "{{ 60 if (is_state('switch.house_thumbsup_reset','unavailable') or is_state('switch.house_thumbsup_reset','unknown')) else 255 }}"
+      event:
+        "down": 
+          - service_template: >
+              {% if val == 0 -%}
+              switch.turn_on
+              {% endif -%}
+            entity_id: "switch.house_thumbsup_reset"
+
+    - obj: "p3b97"  # on/off switch
+      properties:
+        "val": "{{ 0 if (is_state('switch.house_thumbsup_reset', 'off') or is_state('switch.house_thumbsup_reset', 'unavailable')) else 1 }}"
+        "click": "{{ 'false' if (is_state('switch.house_thumbsup_reset','unavailable') or is_state('switch.house_thumbsup_reset','unknown')) else 'true' }}"
+        "opacity": "{{ 60 if (is_state('switch.house_thumbsup_reset','unavailable') or is_state('switch.house_thumbsup_reset','unknown')) else 255 }}"
+      event:
+        "down":
+          - service_template: >
+              {% if val == 0 -%}
+              switch.turn_on
+              {% endif -%}
+            entity_id: "switch.house_thumbsup_reset"
+    - obj: "p3b30"  # tab dots
+      event:
+        "changed":
+          - service: openhasp.command
+            target:
+              entity_id: openhasp.plate02
+            data:
+              keyword: p3b26.text
+              parameters: >
+                {% if val == 0 %}
+                {{ "#000000 \u2022# #909090 \u2022# #909090 \u2022#" | e }}
+                {%-elif val == 1 %}
+                {{ "#909090 \u2022# #000000 \u2022# #909090 \u2022#" | e }}
+                {%-elif val == 2 %}
+                {{ "#909090 \u2022# #909090 \u2022# #000000 \u2022#" | e }}
+                {% endif %}
+# Pellet Stove Power Level
+    - obj: "p3b42"  # dropdown with Power Levels
+      properties:
+        "options": "{% for mode in state_attr('select.esph_house_power_select', 'options') %}
+        {{ mode }}\n{% endfor %}"       
+        "click": "{{ 'false' if (is_state('input_select.zigbee2mqtt_log_level','unavailable') or is_state('climate.house_wood_pellet_stove','unknown')) else 'true' }}"
+        "val": >
+          {% for mode in state_attr('select.esph_house_power_select', 'options') %}
+            {{ loop.index -1 if mode == states('select.esph_house_power_select') }}
+          {% endfor %}
+      event:
+        "changed":
+          - service: select.select_option
+            target:
+              entity_id: select.esph_house_power_selectx
+            data:
+              option: "{{ text }}"
+
+
+    - obj: "p3b43"  # dropdown with hvac_modes
+      properties:
+        "options": >
+          {% if state_attr('climate.house_wood_pellet_stove','hvac_modes') is not none %}{%for mode in state_attr('climate.house_wood_pellet_stove','hvac_modes')%}
+          {%- if mode == 'off' -%}
+          Off{{"\n"|e}}
+          {%- elif mode == 'heat' -%}
+          Heating{{"\n"|e}}
+          {%- elif mode == 'cool' -%}
+          Cooling{{"\n"|e}}
+          {%- elif mode == 'heat_cool' -%}
+          Heat/Cool{{"\n"|e}}
+          {%- elif mode == 'dry' -%}
+          Drying{{"\n"|e}}
+          {%- elif mode == 'fan_only' -%}
+          Fan only{{"\n"|e}}
+          {%- else -%}
+          On{{"\n"|e}}
+          {%- endif -%}
+          {%-if not loop.last%}{%-endif%}{%-endfor%}{% endif %}
+        "click": "{{ 'false' if (is_state('climate.house_wood_pellet_stove','unavailable') or is_state('select.esph_house_power_select')) else 'true' }}"
+        "val": >
+          {% if not (is_state('select.esph_house_power_select','unavailable')) %}{%for mode in state_attr('select.esph_house_power_select')%}
+          {{loop.index -1 if mode == states('climate.house_wood_pellet_stove') }}
+          {%-endfor%}{% endif %}
+      event:
+        "changed":
+          - service: climate.set_hvac_mode
+            target:
+              entity_id: climate.house_wood_pellet_stove
+            data:
+              hvac_mode: >
+                {% if text == "Off" -%}
+                off
+                {% elif text == 'Heating' -%}
+                heat
+                {% elif text == 'Cooling' -%}
+                cool
+                {% elif text == 'Heat/Cool' -%}
+                heat_cool
+                {% elif text == 'Drying' -%}
+                dry
+                {% elif text == 'Fan only' -%}
+                fan_only
+                {% endif -%}
+
+#
+# Weather plate02
+#     
+    - obj: "p3b14" # Icon
+      properties:
+        "src": "{{ 'L:/z-128-' + states('weather.keul_daynight') + '.png' if not is_state('weather.keul_daynight','unavailable') }}"
+#        "zoom": "350" 
+    - obj: "p3b15" # Current date (adjust format to your needs)
+      properties:
+        "text": >
+          {%- if not is_state('weather.keul_daynight','unavailable') %}
+          {%- set day = (states.weather.keul_daynight.last_changed).strftime('%w') %}
+          {%- set days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] %}
+          {{- days[ day | int -1 ] }} {{ (states.weather.keul_daynight.last_changed).strftime('%m/%d/%y') }}
+          {% endif -%}
+    - obj: "p3b16" # Current temp (you can use your own outdoor temp sensor if you have one)
+      properties:
+        "text": "{{ state_attr('weather.keul_daynight','temperature') |string + '°F' if not is_state('weather.keul_daynight','unavailable') }}"  # or "{{ states('sensor.your_own_temp_sensor') if not is_state('sensor.your_own_temp_sensor','unavailable') else '--' }}°F"
+
+    - obj: "p3b17" # Current weather condition
+      properties:
+         "text": "{{ state_attr('weather.keul_daynight','forecast')[0]['detailed_description'] if not is_state('weather.keul_daynight','unavailable') else '-' }}"
+
+            # {% if is_state('weather.keul_daynight','clear-night') -%}
+            # Clear night
+            # {% elif is_state('weather.keul_daynight','cloudy') -%}
+            # Cloudy
+            # {% elif is_state('weather.keul_daynight','fog') -%}
+            # Fog
+            # {% elif is_state('weather.keul_daynight','hail') -%}
+            # Hail
+            # {% elif is_state('weather.keul_daynight','lightning') -%}
+            # Lightning
+            # {% elif is_state('weather.keul_daynight','lightning-rainy') -%}
+            # Thunderstorms
+            # {% elif is_state('weather.keul_daynight','partlycloudy') -%}
+            # Partly cloudy
+            # {% elif is_state('weather.keul_daynight','pouring') -%}
+            # Pouring rain
+            # {% elif is_state('weather.keul_daynight','rainy') -%}
+            # Rainy
+            # {% elif is_state('weather.keul_daynight','snowy') -%}
+            # Snowy
+            # {% elif is_state('weather.keul_daynight','snowy-rainy') -%}
+            # Snowy-rainy
+            # {% elif is_state('weather.keul_daynight','sunny') -%}
+            # Sunny
+            # {% elif is_state('weather.keul_daynight','windy') -%}
+            # Windy
+            # {% elif is_state('weather.keul_daynight','windy-variant') -%}
+            # Windy
+            # {% elif is_state('weather.keul_daynight','exceptional') -%}
+            # Exceptional
+            # {% elif is_state('weather.keul_daynight','unavailable') -%}
+            # (not available)
+            # {% else -%}
+            # {{ states('weather.keul_daynight') }}
+            # {% endif -%}
+
+    - obj: "p3b23" # Forecast condition +1h
+      properties:
+        "src": >
+          {%- if not is_state('weather.keul_daynight','unavailable') %}
+          L:/z-32-{{ state_attr('weather.keul_daynight','forecast')[1]['condition'] }}.png
+          {%- endif %}
+        "zoom": "350"              
+
+    - obj: "p3b21" # Forecast time EVENING (using Dawn/Morn etc instead of Today/Tomorrow)
+      properties:
+        "text": >
+          {%- if not is_state('weather.keul_daynight','unavailable') %}
+          {%- set hour = as_timestamp(strptime(state_attr('weather.keul_daynight','forecast')[1]['datetime'], '%Y-%m-%dT%H:%M:%S%z', default='2020-01-00T00:00:00+00:00')) | timestamp_custom("%-H") | int %}
+            {%- if 4 <= hour < 6 %}
+          Dawning
+            {%- elif 6 <= hour < 9 %}
+          Morning
+            {%- elif 9 <= hour < 12 %}
+          Forenoon
+            {%- elif 12 <= hour < 18 %}
+          Afternoon
+            {%- elif 18 <= hour < 23 %}
+          Evening
+            {%- elif 23 <= hour or hour < 4 %}
+          Night
+            {%- endif %}
+          {%- endif %}
+
+    - obj: "p3b22" # Forecast temp EVENING
+      properties:
+        "text": "{{ state_attr('weather.keul_daynight','forecast')[1]['temperature'] if not is_state('weather.keul_daynight','unavailable') else '-' }}"
+
+    - obj: "p3b23" # Forecast condition EVENING
+      properties:
+        "src": >
+          {%- if not is_state('weather.keul_daynight','unavailable') %}
+          L:/z-32-{{ state_attr('weather.keul_daynight','forecast')[1]['condition'] }}.png
+          {%- endif %}
+        "zoom": "350"               
+
+    - obj: "p3b31" # Forecast time TOMORROW
+      properties:
+        "text": >
+          {%- if not is_state('weather.keul_daynight','unavailable') %}
+              {%- set update = states('sensor.date') %}
+              {%- set midnight = now().replace(hour=0, minute=0, second=0, microsecond=0).timestamp() %}
+              {%- set event = as_timestamp(strptime(state_attr('weather.keul_daynight','forecast')[2]['datetime'], '%Y-%m-%dT%H:%M:%S%z', default='2020-01-00T00:00:00+00:00')) %}
+              {%- set delta = ((event - midnight) // 86400) | int %}
+            {%- if delta == 0 %}
+          Today
+            {%- elif delta == 1 %}
+          Tomorrow
+            {%- endif %}
+          
+          {%- endif %}
+
+    - obj: "p3b32" # Forecast temp +4h
+      properties:
+        "text": "{{ state_attr('weather.keul_daynight','forecast')[2]['temperature'] if not is_state('weather.keul_daynight','unavailable') else '-' }}"
+
+    - obj: "p3b33" # Forecast condition +4h
+      properties:
+        "src": >
+          {%- if not is_state('weather.keul_daynight','unavailable') %}
+          L:/z-32-{{ state_attr('weather.keul_daynight','forecast')[2]['condition'] }}.png
+          {%- endif %}
+        "zoom": "350"     
+
+
+    - obj: "p3b41" # Forecast date +2d
+      properties:
+        "text": >
+          {%- if not is_state('weather.keul_daynight','unavailable') %}
+          {%- set now = as_timestamp(strptime(state_attr('weather.keul_daynight','forecast')[4]['datetime'], '%Y-%m-%dT%H:%M:%S%z', default='2020-01-00T00:00:00+00:00')) %}
+          {%- set day = now | timestamp_custom("%w") %}
+          {%- set days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] %}
+          {{ days[ day | int -1 ] }}{{- now | timestamp_custom(" ") }}
+          {%- endif %}
+
+    - obj: "p3b42" # Forecast temp min +2d
+      properties:
+        "text": "{{ state_attr('weather.keul_daynight','forecast')[4]['temperature'] if not is_state('weather.keul_daynight','unavailable') else '-' }}"
+
+    - obj: "p3b43" # Forecast temp +2d
+      properties:
+        "src": >
+          {%- if not is_state('weather.keul_daynight','unavailable') %}
+          L:/z-32-{{ state_attr('weather.keul_daynight','forecast')[4]['condition'] }}.png
+          {%- endif %}
+        "zoom": "350"    
+
+    - obj: "p3b51" # Forecast date +3d
+      properties:
+        "text": >
+          {%- if not is_state('weather.keul_daynight','unavailable') %}
+          {%- set now = as_timestamp(strptime(state_attr('weather.keul_daynight','forecast')[6]['datetime'], '%Y-%m-%dT%H:%M:%S%z', default='2020-01-00T00:00:00+00:00')) %}
+          {%- set day = now | timestamp_custom("%w") %}
+          {%- set days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] %}
+          {{ days[ day | int -1 ] }}{{- now | timestamp_custom(" ") }}
+          {%- endif %}
+
+    - obj: "p3b52" # Forecast temp min +3d
+      properties:
+        "text": "{{ state_attr('weather.keul_daynight','forecast')[6]['temperature'] if not is_state('weather.keul_daynight','unavailable') else '-' }}"
+
+    - obj: "p3b53" # Forecast temp +3d
+      properties:
+        "src": >
+          {%- if not is_state('weather.keul_daynight','unavailable') %}
+          L:/z-32-{{ state_attr('weather.keul_daynight','forecast')[6]['condition'] }}.png
+          {%- endif %}
+        "zoom": "350"    
+
+    - obj: "p3b61" # Forecast date +4d
+      properties:
+        "text": >
+          {%- if not is_state('weather.keul_daynight','unavailable') %}
+          {%- set now = as_timestamp(strptime(state_attr('weather.keul_daynight','forecast')[8]['datetime'], '%Y-%m-%dT%H:%M:%S%z', default='2020-01-00T00:00:00+00:00')) %}
+          {%- set day = now | timestamp_custom("%w") %}
+          {%- set days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] %}
+          {{ days[ day | int -1 ] }}{{- now | timestamp_custom(" ") }}
+          {%- endif %}
+
+    - obj: "p3b62" # Forecast temp min +4d
+      properties:
+        "text": "{{ state_attr('weather.keul_daynight','forecast')[8]['temperature'] if not is_state('weather.keul_daynight','unavailable') else '-' }}"
+
+    - obj: "p3b63" # Forecast temp +4d
+      properties:
+        "src": >
+          {%- if not is_state('weather.keul_daynight','unavailable') %}
+          L:/z-32-{{ state_attr('weather.keul_daynight','forecast')[8]['condition'] }}.png
+          {%- endif %}
+        "zoom": "350"            
