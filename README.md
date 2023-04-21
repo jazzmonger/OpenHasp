@@ -1,4 +1,6 @@
-My OpenHasp configs 
+My OpenHasp configs.
+HEAVILY inspired by https://github.com/htvekov/openHASP-Energy
+all the backgrounds and other files can be found there.
 
 Sunton 800x480 is my favorite display so far.
 Features:
