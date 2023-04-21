@@ -2,7 +2,7 @@ My OpenHasp configs.
 - HEAVILY inspired by https://github.com/htvekov/openHASP-Energy
 - all the backgrounds and other files can be found there.
 
-Sunton 800x480 is my favorite display so far.
+Sunton 800x480 is my favorite display so far. https://www.openhasp.com/0.7.0/hardware/sunton/esp32-8048s0xx/
 Features:
 - Pandora media player
 - American NWS Weather card (still needs tweaking)
