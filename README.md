@@ -2,8 +2,11 @@ My OpenHasp configs
 
 Sunton 800x480 is my favorite display so far.
 Features:
+
 Pandora media player
+
 American NWS Weather card (still needs tweaking)
+
 MPP Solar Inverter card using Home Assistant integration
 
 Problems/To Do's:
