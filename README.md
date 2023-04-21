@@ -2,12 +2,9 @@ My OpenHasp configs
 
 Sunton 800x480 is my favorite display so far.
 Features:
-
-Pandora media player
-
-American NWS Weather card (still needs tweaking)
-
-MPP Solar Inverter card using Home Assistant integration
+- Pandora media player
+- American NWS Weather card (still needs tweaking)
+- MPP Solar Inverter card using Home Assistant integration
 
 Problems/To Do's:
 the weather page needs to be updated so that when evening rolls around, the forecast is actually for the nex DAY instead of all evenings.  That will take some logic in the yaml file.
