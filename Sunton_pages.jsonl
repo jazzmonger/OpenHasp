@@ -1,101 +1,176 @@
-{"page":1,"comment":"---------- Page 1 Thermostat  ----------"}
-{"page":1,"id":10,"obj":"obj","x":5,"y":35,"w":767,"h":375,"click":0}
-{"page":1,"id":10,"obj":"obj","x":5,"y":35,"w":767,"h":375,"click":0}
-{"page":1,"id":20,"obj":"arc","x":5,"y":37,"w":767,"h":767,"min":170,"max":300,"val":250,"border_side":0,"type":0,"rotation":0,"start_angle":135,"end_angle":45,"adjustable":"true","line_width":21,"line_width10":21,"line_color10":"#34bdeb","bg_opa":0,"pad_top20":5,"pad_bottom20":5,"pad_left20":5,"pad_right20":5,"pad_top":5,"pad_bottom":5,"pad_left":5,"pad_right":5}
-{"page":1,"id":21,"obj":"gauge","x":28,"y":28,"w":583,"h":583,"parentid":20,"min":170,"max":300,"val":224,"format":1,"critical_value":301,"label_count":14,"line_count":27,"border_width":0,"pad_top":2,"pad_bottom":2,"pad_left":2,"pad_right":2,"value_str":"°F","value_ofs_y":55,"value_font":16,"bg_opa":0,"line_width10":3,"line_rounded10":1,"line_color":"#348feb","line_color60":"#348feb","scale_grad_color":"#eb4934","scale_grad_color60":"#eb4934","scale_end_color60":"#eb4934"}
-{"page":1,"id":22,"obj":"obj","x":85,"y":85,"w":60,"h":60,"parentid":20,"click":0,"radius":30,"border_width":2,"border_opa":200}
-{"page":1,"id":23,"obj":"label","x":80,"y":100,"w":70,"h":30,"parentid":20,"text":"55.5","text_font":24,"align":"center"}
-{"page":1,"id":24,"obj":"obj","x":90,"y":3,"w":60,"h":30,"click":0,"radius":5}
-{"page":1,"id":25,"obj":"label","x":90,"y":3,"w":60,"h":30,"text":"55","text_font":24,"align":"center"}
+{"page":0,"comment":"---------- All Pages ----------"}
+{"id":24,"action":{"down":"page 4"},"obj":"btn","x":000,"y":400,"w":110,"h":80,"bg_opa":180,"bg_color":"#000000","border_color":"#C7BAA7","border_width":2,"radius":10,"radius1":10,"radius2":10,"text":"\uF1F3","text_color":"#978B7D","text_font":64}
+{"id":25,"action":{"down":"page 1"},"obj":"btn","x":115,"y":400,"w":110,"h":80,"bg_opa":180,"bg_color":"#000000","border_color":"#C7BAA7","border_width":2,"radius":10,"radius1":10,"radius2":10,"text":"\ufa74","text_color":"#978B7D","text_font":64}
+{"id":01,"action":{"down":"page prev"},"obj":"btn","x":230,"y":400,"w":110,"h":80,"bg_opa":180,"bg_color":"#000000","border_color":"#C7BAA7","border_width":2,"radius":10,"radius1":10,"radius2":10,"text":"\ue141","text_color":"#978B7D","text_font":64}
+{"id":02,"action":{"down":"page 3"},"obj":"btn","x":345,"y":400,"w":110,"h":80,"bg_opa":180,"bg_color":"#000000","border_color":"#C7BAA7","border_width":2,"radius":10,"radius1":10,"radius2":10,"text":"\ue2dc","text_color":"#978B7D","text_font":64}
+{"id":03,"action":{"down":"page next"},"obj":"btn","x":460,"y":400,"w":110,"h":80,"bg_opa":180,"bg_color":"#000000","border_color":"#C7BAA7","border_width":2,"radius":10,"radius1":10,"radius2":10,"text":"\ue142","text_color":"#978B7D","text_font":64}
+{"id":26,"action":{"down":"page 2"},"obj":"btn","x":575,"y":400,"w":110,"h":80,"bg_opa":180,"bg_color":"#000000","border_color":"#C7BAA7","border_width":2,"radius":10,"radius1":10,"radius2":10,"text":"\ue4c3","text_color":"#978B7D","text_font":64}
+{"id":27,"action":{"down":"page 3"},"obj":"btn","x":690,"y":400,"w":110,"h":80,"bg_opa":180,"bg_color":"#000000","border_color":"#C7BAA7","border_width":2,"radius":10,"radius1":10,"radius2":10,"text":"\ue595","text_color":"#978B7D","text_font":64}
 
-{"page":1,"id":41,"obj":"switch","x":35,"y":250,"w":60,"h":30,"radius":25,"radius20":25}
-{"page":1,"id":42,"obj":"dropdown","x":115,"y":250,"w":110,"h":30,"options":"Power Level","direction":"1","radius":10}
+{"id":04,"obj":"roller","click":false,"x":0,"y":-1,"w":800,"text_line_space":10,"bg_opa1":180,"bg_opa2":0,"border_width1":0,"val":0,"rows":1,"options":"ENERGY\nALEXA\nKITCHEN\nCAMERAS\n","text_font":24,"bg_color1":"#000000","text_color1":"#FFFFFF","bg_color":"#000000","text_color":"#000000","border_side":0,"radius":3}
+
+{"id":5,"obj":"label","x":707,"y":0,"h":40,"w":90,"bg_opa":0,"text":"95.0°F","align":"right","bg_color":"#2C3E50","text_color":"white","text_font":32}
+
+{"id":06,"obj":"label","x":50,"y":3,"w":250,"h":40,"bg_opa":0,"text":"00:00","bg_color":"#2C3E50","text_color":"white","align":"left","text_font":28}
+
+{"id":10,"obj":"label","x":160,"y":3,"w":250,"h":30,"bg_opa":0,"text":"Jan 1 2100","template":"%b %e, %Y","bg_color":"#2C3E50","text_color":"white","align":"left","text_font":28}
+{"id":07,"obj":"label","x":05,"y":0,"w":40,"h":30,"bg_opa":0,"text":"\ue5a9","bg_color":"#2C3E50","text_color":"pink","text_font":20}
+{"id":08,"obj":"label","x":25,"y":0,"w":40,"h":30,"bg_opa":0,"text":"\ue004","bg_color":"#2C3E50","text_color":"green","text_font":20}
+
+{"id":09,"obj":"label","x":625,"y":0,"h":40,"w":90,"bg_opa":0,"text":"\ue50f","align":"right","bg_color":"#2C3E50","text_color":"red","text_font":35}
+
+{"page":1,"comment":"---------- ENERGY ----------"}
+{"page":1,"id":0,"prev":7}
+{"id":01,"obj":"img","enabled":true,"x":0,"y":0,"w":800,"h":480,"auto_size":0,"src":"L:/transmission_800x480.bin"}
+
+{"page":1,"comment":"PV production"}
+{"id":02,"obj":"gauge","min":0,"max":9000,"critical_value":7001,"bg_opa":180,"x":10,"y":50,"w":290,"h":290,"val":0,"value_str":"\ue599","value_ofs_y":50,"value_font":64,"bg_opa2":100,"line_rounded10":true,"line_color":"orange","line_color10":"orange","line_color60":"orange","scale_grad_color":"lime","scale_grad_color60":"lime","line_count":31,"text_font":24,"text_color":"white","pad_inner":30,"label_count":7}
+
+{"page":1,"comment":"load power"}
+{"id":03,"obj":"gauge","min":0,"max":9000,"critical_value":7000,"bg_opa":180,"x":500,"y":50,"w":290,"h":290,"val":0,"value_str":"\ue6a1","value_ofs_y":50,"value_font":64,"bg_opa2":100,"line_rounded10":true,"line_color":"lime","line_color10":"orange","line_color60":"lime","scale_grad_color":"red","scale_grad_color60":"red","scale_end_color":"red","scale_end_color60":"red","line_count":33,"text_font":24,"text_color":"white","pad_inner":30,"label_count":9}
+
+{"page":1,"comment":" house consumption"}
+{"id":04,"obj":"label","enabled":false,"x":570,"y":280,"h":50,"w":150,"text":"1.0 W","align":"center","bg_opa":0,"text_color":"white","text_font":40}
+
+{"page":1,"comment":"PV Power "}
+{"id":05,"obj":"label","enabled":false,"x":080,"y":280,"h":50,"w":150,"text":"5.0 W","align":"center","bg_opa":0,"text_color":"white","text_font":40}
+
+{"page":1,"comment":"Inverter internal Temps circle "}
+{"id":40,"obj":"arc","x":265,"y":260,"w":130,"h":130,"min":0,"max":0,"val":0,"adjustable":0,"line_color":"lime","line_color10":"orange","line_width":5,"line_width10":5,"bg_opa":180,"border_width":0,"start_angle10":270,"end_angle10":269,"value_str":"\uE50F","value_color":"white","value_font":60,"value_ofs_y":-25}
+
+{"page":1,"comment":"Inverter internal Temps "}
+{"id":10,"obj":"label","x":265,"y":325,"w":130,"h":30,"bg_opa":0,"align":"center","text_color":"orange","border_width":0,"text":"10.0°C","text_font":28}
+
+{"page":1,"comment":"Inverter Loads "}
+{"id":20,"obj":"label","x":315,"y":45,"w":175,"h":30,"bg_opa":0,"align":"center","text_color":"black","border_width":2,"text":"Inverter Loads","text_font":26}
+
+{"page":1,"comment":"Inverter 1 Load "}
+{"id":21,"obj":"label","x":320,"y":80,"w":175,"h":30,"bg_opa":0,"align":"left","text_color":"black","border_width":0,"text":"1: 25%","text_font":26}
+
+{"page":1,"comment":"Inverter 2 Load "}
+{"id":22,"obj":"label","x":415,"y":80,"w":175,"h":30,"bg_opa":0,"align":"left","text_color":"black","border_width":0,"text":"2: 50%","text_font":26}
 
 
-{"page":4,"comment":"---------- Page 4 Media Player  ----------"}
-{"page":4,"id":1,"obj":"btn","x":0,"y":0,"w":240,"h":30,"text":"Alexa","text_font":16,"bg_color":"#2C3E50","text_color":"#FFFFFF","radius":0,"border_side":0,"click":0}
-{"page":4,"id":10,"obj":"obj","x":5,"y":35,"w":767,"h":375,"click":0,"bg_opa":0,"shadow_opa":140,"shadow_color":"black","shadow_width":20,"shadow_spread":0}
-{"page":4,"id":11,"obj":"obj","x":8,"y":38,"w":200,"h":84,"click":0}
-{"page":4,"id":12,"obj":"label","x":10,"y":48,"w":196,"h":30,"text":"-","mode":"scroll","align":1}
-{"page":4,"id":13,"obj":"label","x":10,"y":83,"w":196,"h":30,"text":"-","mode":"scroll","align":1}
-{"page":4,"id":14,"obj":"bar","x":8,"y":117,"w":200,"h":5,"min":0,"max":100,"border_opa":0,"pad_top":0,"pad_bottom":0,"pad_left":0,"pad_right":0}
-{"page":4,"id":15,"obj":"dropdown","x":8,"y":129,"w":120,"h":30,"options":"Source1\nSource2\nSource3","direction":3,"max_height":300,"radius":5}
-{"page":4,"id":16,"obj":"dropdown","x":133,"y":129,"w":75,"h":30,"options":"Sound\nPop\nRock","direction":2,"radius":5}
-{"page":4,"id":17,"obj":"btn","x":8,"y":166,"w":50,"h":70,"toggle":false,"text":"\uE4AE","text_font":32}
-{"page":4,"id":18,"obj":"btn","x":66,"y":166,"w":83,"h":70,"toggle":false,"text":"\uE40A","text_font":32}
-{"page":4,"id":19,"obj":"btn","x":157,"y":166,"w":51,"h":70,"toggle":false,"text":"\uE4AD","text_font":32}
-{"page":4,"id":20,"obj":"slider","x":212,"y":38,"w":20,"h":244,"min":0,"max":100,"val":85}
-{"page":4,"id":21,"obj":"btn","x":8,"y":241,"w":45,"h":40,"toggle":false,"text":"\uE425","text_font":32}
-{"page":4,"id":22,"obj":"btn","x":60,"y":241,"w":45,"h":40,"toggle":false,"text":"\uE457","text_font":32}
-{"page":4,"id":23,"obj":"btn","x":111,"y":241,"w":45,"h":40,"toggle":false,"text":"\uE49E","text_font":32}
-{"page":4,"id":24,"obj":"btn","x":163,"y":241,"w":45,"h":40,"toggle":false,"text":"\uE57E","text_font":32}
+{"page":1,"comment":" battery power "}
+{"id":41,"obj":"arc","x":325,"y":118,"w":150,"h":150,"max":0,"val":0,"adjustable":0,"line_color":"#00c0c0","line_color10":"indigo","line_width":5,"line_width10":5,"bg_opa":180,"border_width":0,"start_angle10":270,"end_angle10":269,"value_str":"\uF2A3","value_color":"yellow","value_font":64,"value_ofs_y":-39}
 
-{"page":,"comment":"---------- Page 5 Weather ----------"}
-{"id":1,"obj":"btn","x":0,"y":0,"w":240,"h":30,"text":"WEATHER","text_font":16,"bg_color":"#2C3E50","text_color":"#FFFFFF","radius":0,"border_side":0,"click":0}
-{"id":2,"obj":"obj","x":5,"y":35,"w":767,"h":375,"click":0}
-{"id":14,"obj":"img","src":"L:/openhasp_dummy_img.png","parentid":2,"auto_size":1,"w":128,"offset_x":-6,"offset_y":-10}
+{"page":1,"comment":" battery % "}
+{"id":11,"obj":"label","x":325,"y":180,"w":150,"h":32,"bg_opa":0,"align":"center","text_color":"white","border_width":0,"text":"??.?%","text_font":30}
 
-{"id":15,"obj":"label","x":100,"y":10,"w":130,"h":25,"align":"center","text":"date current","parentid":2}
-{"id":16,"obj":"label","x":125,"y":34,"w":95,"h":40,"align":"center","text":"00.0°C","parentid":2,"text_font":32}
-{"id":17,"obj":"label","x":110,"y":78,"w":120,"h":25,"align":"center","text":"condition","parentid":2}
-{"id":19,"obj":"label","x":90,"y":95,"w":60,"h":30,"text":"#000000 \u2022# #909090 \u2022#","parentid":2,"text_font":24,"align":"center","text_color":"grey"}
+{"page":1,"comment":"battery watts "}
+{"id":12,"obj":"label","x":322,"y":210,"w":150,"h":30,"bg_opa":0,"align":"center","text_color":"#00c0c0","border_width":0,"text":"12w","text_font":30}
 
-{"id":10,"obj":"tabview","x":0,"y":0,"w":240,"h":260,"parentid":2,"btn_pos":0,"bg_opa":0,"border_width":0}
-{"id":11,"obj":"tab","parentid":10}
-{"id":12,"obj":"tab","parentid":10}
 
-{"id":21,"obj":"label","x":8,"y":123,"w":130,"h":22,"align":"left","text":"hour+2","parentid":11,"pad_top":3,"click":0}
-{"id":22,"obj":"label","x":124,"y":123,"w":50,"h":22,"align":"center","text":"00.0","parentid":11,"pad_top":-2,"text_font":24,"click":0}
-{"id":23,"obj":"img","x":182,"y":118,"w":32,"h":32,"src":"L:/openhasp_dummy_img.png","parentid":11,"click":0}
+{"page":1,"comment":" grid power "}
+{"id":42,"obj":"arc","x":405,"y":260,"w":130,"h":130,"min":0,"max":0,"val":0,"adjustable":0,"line_color":"#00c0c0","line_color10":"orange","line_width":5,"line_width10":5,"bg_opa":180,"border_width":0,"start_angle10":270,"end_angle10":269,"value_str":"\ued3e","value_color":"white","value_font":64,"value_ofs_y":-25}
 
-{"id":31,"obj":"label","x":8,"y":154,"w":130,"h":22,"align":"left","text":"hour+3","parentid":11,"pad_top":3,"click":0}
-{"id":32,"obj":"label","x":124,"y":154,"w":50,"h":22,"align":"center","text":"00.0","parentid":11,"pad_top":-2,"text_font":24,"click":0}
-{"id":33,"obj":"img","x":182,"y":150,"w":32,"h":32,"src":"L:/openhasp_dummy_img.png","parentid":11,"click":0}
+{"page":1,"comment":" grid watts  "}
+{"id":13,"obj":"label","x":405,"y":325,"w":130,"h":30,"bg_opa":0,"align":"center","text_color":"white","border_width":0,"text":"13.0 kWh","text_font":28}
 
-{"id":41,"obj":"label","x":8,"y":186,"w":130,"h":22,"align":"left","text":"hour+4","parentid":11,"pad_top":3,"click":0}
-{"id":42,"obj":"label","x":124,"y":186,"w":50,"h":22,"align":"center","text":"00.0","parentid":11,"pad_top":-2,"text_font":24,"click":0}
-{"id":43,"obj":"img","x":182,"y":182,"w":32,"h":32,"src":"L:/openhasp_dummy_img.png","parentid":11,"click":0}
+{"page":2,"comment":"----------------- MEDIA PLAYER -----------------"}
+{"page":2,"bg_grad_color":"#d58518","bg_color":"grey","border_width":0}
+{"page":2,"id":1,"prev":0}
 
-{"id":51,"obj":"label","x":8,"y":218,"w":130,"h":22,"align":"left","text":"hour+5","parentid":11,"pad_top":3,"click":0}
-{"id":52,"obj":"label","x":124,"y":218,"w":50,"h":22,"align":"center","text":"00.0","parentid":11,"pad_top":-2,"text_font":24,"click":0}
-{"id":53,"obj":"img","x":182,"y":214,"w":32,"h":32,"src":"L:/openhasp_dummy_img.png","parentid":11,"click":0}
+{"comment":"Box & Image for Album art"}
+{"id":39,"obj":"obj","enabled":true,"x":0,"y":43,"w":355,"h":355,"bg_opa":180,"clip_corner":1,"border_post":1,"border_color":"#FFAC00","border_width":2,"radius":10,"radius1":10,"radius2":10}
+{"id":40,"obj":"img","enabled":true,"x":0,"y":0,"w":355,"h":355,"parentid":39,"auto_size":1,"src":"L:/openhasp.png"}
 
-{"id":61,"obj":"label","x":6,"y":123,"w":100,"h":22,"align":"left","text":"date+1","parentid":12,"pad_top":3,"click":0}
-{"id":62,"obj":"label","x":102,"y":123,"w":40,"h":22,"align":"center","text":"00.0","parentid":12,"pad_top":-2,"text_font":24,"text_color":"Navy","click":0}
-{"id":63,"obj":"label","x":150,"y":123,"w":40,"h":22,"align":"center","text":"00.0","parentid":12,"pad_top":-2,"text_font":24,"text_color":"Blush","click":0}
-{"id":64,"obj":"img","x":194,"y":118,"w":32,"h":32,"src":"L:/openhasp_dummy_img.png","parentid":12,"click":0}
+{"id":13,"obj":"obj","x":358,"y":43,"w":442,"h":140,"enabled":false,"bg_opa":100,"bg_color":"#000000","border_color":"#FFAC00","border_width":2,"radius":10,"radius1":10,"radius2":10}
 
-{"id":71,"obj":"label","x":6,"y":154,"w":100,"h":22,"align":"left","text":"date+2","parentid":12,"pad_top":3,"click":0}
-{"id":72,"obj":"label","x":102,"y":154,"w":40,"h":22,"align":"center","text":"00.0","parentid":12,"pad_top":-2,"text_font":24,"text_color":"Navy","click":0}
-{"id":73,"obj":"label","x":150,"y":154,"w":40,"h":22,"align":"center","text":"00.0","parentid":12,"pad_top":-2,"text_font":24,"text_color":"Blush","click":0}
-{"id":74,"obj":"img","x":194,"y":150,"w":32,"h":32,"src":"L:/openhasp_dummy_img.png","parentid":12,"click":0}
+{"comment":"Title & Artist text"}
+{"id":14,"obj":"label","enabled":false,"x":35,"y":-02,"w":399,"h":32,"parentid":13,"bg_opa":0,"bg_color":"#000000","mode":"break","text":"Artistpoiupoipoiupoiupoiu lkjhlkjhlkjh","text_color":"#C7BAA7","text_font":28}
+{"id":15,"obj":"label","enabled":false,"x":35,"y":68,"w":399,"h":64,"parentid":13,"bg_opa":0,"bg_color":"#000000","mode":"break","text":"Titlepoiupoiupoiupoiupoiupoiupoiu hjlkjhlkjh oiuyoiuy uytruytr","text_color":"#C7BAA7","text_font":28}
 
-{"id":81,"obj":"label","x":6,"y":186,"w":100,"h":22,"align":"left","text":"date+3","parentid":12,"pad_top":3,"click":0}
-{"id":82,"obj":"label","x":102,"y":186,"w":40,"h":22,"align":"center","text":"00.0","parentid":12,"pad_top":-2,"text_font":24,"text_color":"Navy","click":0}
-{"id":83,"obj":"label","x":150,"y":186,"w":40,"h":22,"align":"center","text":"00.0","parentid":12,"pad_top":-2,"text_font":24,"text_color":"Blush","click":0}
-{"id":84,"obj":"img","x":194,"y":182,"w":32,"h":32,"src":"L:/openhasp_dummy_img.png","parentid":12,"click":0}
+{"id":41,"obj":"bar","enabled":false,"x":35,"y":64,"w":390,"h":4,"parentid":13,"min":0,"max":100,"bg_color10":"#FFAC00","bg_opa":100,"border_opa":0,"pad_top":0,"pad_bottom":0,"pad_left":0,"pad_right":0}
 
-{"id":91,"obj":"label","x":6,"y":218,"w":100,"h":22,"align":"left","text":"date+4","parentid":12,"pad_top":3,"click":0}
-{"id":92,"obj":"label","x":102,"y":218,"w":40,"h":22,"align":"center","text":"00.0","parentid":12,"pad_top":-2,"text_font":24,"text_color":"Navy","click":0}
-{"id":93,"obj":"label","x":150,"y":218,"w":40,"h":22,"align":"center","text":"00.0","parentid":12,"pad_top":-2,"text_font":24,"text_color":"Blush","click":0}
-{"id":94,"obj":"img","x":194,"y":214,"w":32,"h":32,"src":"L:/openhasp_dummy_img.png","parentid":12,"click":0}
+{"comment":"Previous"}
+{"id":16,"obj":"btn","x":378,"y":264,"w":83,"h":79,"bg_opa":150,"bg_color":"#000000","border_color":"#FFAC00","border_width":2,"radius":10,"radius1":10,"radius2":10,"text":"\ue4ae","text_color":"#C7BAA7","text_font":64}
 
-{"page":10,"comment":"---------- Page 10 Color picker  ----------"}
-{"page":10,"id":31,"obj":"slider","x":6,"y":15,"w":14,"h":180,"min":1,"max":255}
-{"page":10,"id":32,"obj":"cpicker","x":60,"y":10,"w":180,"h":180}
+{"comment":"Play button"}
+{"id":17,"obj":"btn","x":472,"y":264,"w":168,"h":79,"bg_opa":150,"toggle":true,"bg_color":"#000000","border_color":"#FFAC00","border_width":2,"radius":10,"radius1":10,"radius2":10,"text":"\ue40a","text_color":"#C7BAA7","text_font":64}
 
-{"page":0,"comment":"---------- Page 0 Top bar information  ----------"}
-{"page":0,"id":4,"obj":"label","x":195,"y":5,"h":30,"w":62,"text":"00.0°F","align":0,"text_color":"white","bg_color":"#2C3E50"}
-{"page":0,"id":5,"obj":"label","x":180,"y":5,"h":30,"w":62,"text":"\ue50f","align":0,"text_color":"grey","bg_color":"#2C3E50"}
-{"page":0,"comment":"---------- Page 0 little man  ----------"}
-{"page":0,"id":8,"obj":"label","enabled":false,"x":155,"y":2,"w":30,"h":45,"text":"\ue004","bg_color":"#2C3E50","text_color":"grey","text_font":16}
-{"page":0,"comment":"---------- Page 0 wifi  ----------"}
-{"page":0,"id":7,"obj":"label","enabled":false,"x":65,"y":2,"w":30,"h":45,"text":"\uE5A9","bg_color":"#2C3E50","text_color":"yellow","text_font":16}
+{"comment":"Next"}
+{"id":18,"obj":"btn","x":652,"y":264,"w":82,"h":79,"bg_opa":150,"bg_color":"#000000","border_color":"#FFAC00","border_width":2,"radius":10,"radius1":10,"radius2":10,"text":"\ue4ad","text_color":"#C7BAA7","text_font":64}
 
-{"page":0,"id":6,"obj":"label","x":5,"y":5,"h":30,"w":62,"text":"00:00","align":0,"text_color":"white","bg_color":"#2C3E50"}
+{"comment":"Mute"}
+{"id":24,"obj":"btn","toggle":true,"x":746,"y":274,"w":54,"h":59,"bg_opa":150,"bg_color":"#000000","border_color":"#FFAC00","border_width":2,"text":"\ue580","text_color":"#C7BAA7","text_color1":"#FF0000","text_font":48}
 
-{"page":0,"comment":"---------- Page 0 Navigation butons  ----------"}
-{"page":0,"id":1,"obj":"btn","action":{"down": "page 4"},"x":0,"y":290,"w":79,"h":32,"bg_color":"#2C3E50","text":"\uE75A","text_color":"#FFFFFF","radius":0,"border_side":0,"text_font":28}
-{"page":0,"id":2,"obj":"btn","action":{"down": "page 1"},"x":80,"y":290,"w":80,"h":32,"bg_color":"#2C3E50","text":"\uE238","text_color":"#FFFFFF","radius":0,"border_side":0,"text_font":22}
-{"page":0,"id":3,"obj":"btn","action":{"down": "page 5"},"x":161,"y":290,"w":79,"h":32,"bg_color":"#2C3E50","text":"\uE595","text_color":"#FFFFFF","radius":0,"border_side":0,"text_font":28}
 
+{"comment":"Volume Slider"}
+{"id":20,"obj":"slider","x":385,"y":350,"w":395,"h":35,"bg_opa":100,"bg_color":"#000000","border_color":"#FFAC00","border_width":2,"radius":5,"radius1":50,"radius2":5,"value_font":32,"value_color":"#FFFFFF","value_opa":255,"value_ofs_x":170,"min":0,"max":100,"val":0,"bg_color1":"#FFAC00","border_width1":2,"border_color1":"#FFAC00"}
+
+{"comment":"little man next to Artist"}
+{"id":21,"obj":"label","x":4,"y":000,"w":33,"h":32,"parentid":13,"click":0,"bg_opa":0,"bg_color":"#000000","border_color":"#C7BAA7","border_width":0,"text":"\ue004","text_color":"#FFAC00","text_font":24}
+
+{"comment":"Musical notes next to title"}
+{"id":22,"obj":"label","x":4,"y":065,"w":33,"h":32,"parentid":13,"click":0,"bg_opa":0,"bg_color":"#000000","border_color":"#C7BAA7","border_width":0,"text":"\ue75a","text_color":"#FFAC00","text_font":24}
+
+{"page":3,"comment":"---------- KITCHEN  ----------"}
+{"page":3,"comment":"---------- LEFT - THERMOSTAT  ----------"}
+{"id":100,"obj":"img","enabled":true,"x":0,"y":-40,"w":800,"h":480,"auto_size":0,"src":"L:/idaho_sunrise.png","image_opa":100}
+{"comment":" top middle text"}
+
+{"id":89,"obj":"label","x":120,"y":310,"w":120,"h":40,"bg_color":"black","bg_opa":200,"align":"center","text_color":"white","border_width":0,"radius":10,"radius1":10,"radius2":10,"text":" Heating ","text_font":32}
+
+{"id":87,"obj":"label","x":260,"y":330,"w":120,"h":40,"bg_color":"black","bg_opa":00,"align":"center","text_color":"white","border_width":0,"radius":10,"radius1":10,"radius2":10,"text":"Fix","text_font":18}
+
+{"id":90,"obj":"arc","x":14,"y":60,"w":327,"h":327,"min":600,"max":760,"val":680,"border_side":0,"type":0,"rotation":0,"start_angle":135,"end_angle":45,"adjustable":"true","line_width":30,"line_width10":30,"line_color10":"blue","line_color00":"aqua","bg_opa":0,"pad_top20":8,"pad_bottom20":8,"pad_left20":8,"pad_right20":8,"pad_top":5,"pad_bottom":5,"pad_left":5,"pad_right":5,"bg_opa":50}
+
+{"id":96,"obj":"gauge","x":40,"y":40,"w":245,"h":245,"parentid":90,"min":600,"max":760,"val":650,"format":1,"critical_value":701,"label_count":9,"line_count":17,"border_width":0,"pad_top":1,"pad_bottom":1,"pad_left":1,"pad_right":1,"value_str":"°F","value_ofs_y":65,"value_font":30,"bg_opa":0,"line_width10":8,"line_rounded10":1,"line_color":"blue","line_color60":"#348feb","scale_end_color60":"#eb4934","pad_inner":20,"scale_border_width":4,"scale_end_border_width":4,"scale_width":20}
+
+{"comment":"---------- mid temp circle"}
+{"id":92,"obj":"obj","x":118,"y":105,"w":100,"h":100,"parentid":90,"click":0,"radius":90,"border_width":5,"border_opa":200}
+{"id":88,"obj":"label","x":132,"y":127,"w":75,"h":80,"parentid":90,"text":"66.6","text_font":44,"align":"center"}
+
+{"comment":"---------- target set temp"}
+{"id":95,"obj":"label","parentid":99,"w":50,"x":152,"y":270,"text":"55","text_font":44,"align":"center","bg_opa":200}
+{"id":91,"obj":"switch","x":35,"y":350,"w":80,"h":40,"radius":25,"radius20":35}
+{"id":97,"obj":"switch","x":285,"y":350,"w":65,"h":40,"radius":25,"radius20":35}
+
+{"comment":"----------  Weather ----------"}
+{"comment":"Box "}
+{"id":1,"obj":"obj","enabled":true,"x":360,"y":43,"w":435,"h":355,"bg_opa":0,"clip_corner":1,"border_post":1,"border_color":"#FFAC00","border_width":2,"radius":10,"radius1":10,"radius2":10,"click":0}
+
+{"comment":"Currently"}
+{"id":14,"obj":"img","src":"L:/openhasp.png","parentid":1,"w":128,"h":128,"x":10,"y":0}
+{"id":16,"obj":"label","x":20,"y":115,"w":120,"h":80,"align":"center","text":"00.0°C","parentid":1,"text_font":38}
+
+{"id":17,"obj":"label","x":135,"y":0,"w":305,"h":250,"align":"center","text":"A slight chance of rain showers after noon.","parentid":1,"text_font":23,"mode":"break"}
+
+{"comment":"hourly "}
+{"id":21,"obj":"label","x":25,"y":158,"w":300,"h":80,"align":"left","text":"hour+2","parentid":1,"pad_top":3,"click":0,"text_font":33}
+{"id":22,"obj":"label","x":255,"y":158,"w":100,"h":80,"align":"center","text":"00.0","parentid":1,"pad_top":2,"text_font":24,"click":0,"text_font":33}
+{"id":23,"obj":"img","x":355,"y":163,"w":32,"h":32,"src":"L:/z-32-snowy.png","parentid":1,"click":0}
+
+{"id":31,"obj":"label","x":25,"y":195,"w":300,"h":80,"align":"left","text":"hour+3","parentid":1,"pad_top":3,"click":0,"text_font":33}
+{"id":32,"obj":"label","x":255,"y":195,"w":100,"h":80,"align":"center","text":"00.0","parentid":1,"pad_top":2,"text_font":24,"click":0,"text_font":33}
+{"id":33,"obj":"img","x":355,"y":200,"w":32,"h":32,"src":"L:/z-32-snowy.png","parentid":1,"click":0}
+
+{"id":41,"obj":"label","x":25,"y":232,"w":300,"h":80,"align":"left","text":"hour+4","parentid":1,"pad_top":3,"click":0,"text_font":33}
+{"id":42,"obj":"label","x":255,"y":232,"w":100,"h":80,"align":"center","text":"00.0","parentid":1,"pad_top":2,"text_font":24,"click":0,"text_font":33}
+{"id":43,"obj":"img","x":355,"y":238,"w":32,"h":32,"src":"L:/z-32-snowy.png","parentid":1,"click":0}
+
+{"id":51,"obj":"label","x":25,"y":271,"w":300,"h":80,"align":"left","text":"hour+5","parentid":1,"pad_top":3,"click":0,"text_font":33}
+{"id":52,"obj":"label","x":255,"y":271,"w":100,"h":80,"align":"center","text":"00.0","parentid":1,"pad_top":2,"text_font":24,"click":0,"text_font":33}
+{"id":53,"obj":"img","x":355,"y":276,"w":32,"h":32,"src":"L:/z-32-snowy.png","parentid":1,"click":0}
+
+{"id":61,"obj":"label","x":25,"y":309,"w":300,"h":80,"align":"left","text":"hour+5","parentid":1,"pad_top":3,"click":0,"text_font":33}
+{"id":62,"obj":"label","x":255,"y":309,"w":100,"h":80,"align":"center","text":"00.0","parentid":1,"pad_top":2,"text_font":24,"click":0,"text_font":33}
+{"id":63,"obj":"img","x":355,"y":312,"w":32,"h":32,"src":"L:/z-32-snowy.png","parentid":1,"click":0}
+
+
+{"page":4,"comment":"---------- CAMERAS  ----------"}
+
+{"id":1,"obj":"img","src":"L:/openhasp.png","w":240,"h":240,"x":-140,"y":40}
+{"id":2,"obj":"img","src":"L:/openhasp.png","w":240,"h":240,"x":340,"y":40}
+
+{"page":5,"comment":"----------- ALEXA TIMERS  ------- "}
+{"id":12,"obj":"btn","toggle":true,"x":260,"y":44,"w":300,"h":50,"bg_opa":150,"bg_color":"#000000","border_color":"#FFFFFF","border_width":3,"text":"   Alexa Active Timers","text_color":"#FF0000","text_color1":"#C7BAA7","text_font":32}
+
+{"id":1,"obj":"label","x":100,"y":100,"w":450,"h":90,"border_color":"#848a94","border_width":0,"radius":5,"bg_color":"#5a6173","text":"Alexa Timer1","text_color":"white","text_font":56}
+{"id":2,"obj":"label","x":100,"y":200,"w":450,"h":90,"border_color":"#848a94","border_width":0,"radius":5,"bg_color":"#5a6173","text":"Alexa Timer2","text_color":"white","text_font":56}
+{"id":3,"obj":"label","x":100,"y":300,"w":450,"h":90,"border_color":"#848a94","border_width":0,"radius":5,"bg_color":"#5a6173","text":"Alexa Timer3","text_color":"white","text_font":56}
+
+{"id":9,"obj":"label","x":440,"y":100,"w":210,"h":90,"border_color":"#848a94","border_width":0,"radius":5,"bg_color":"#5a6173","text":"Timer1","text_color":"white","text_font":56}
+{"id":10,"obj":"label","x":440,"y":200,"w":210,"h":90,"border_color":"#848a94","border_width":0,"radius":5,"bg_color":"#5a6173","text":"Timer2","text_color":"white","text_font":56}
+{"id":11,"obj":"label","x":440,"y":300,"w":210,"h":90,"border_color":"#848a94","border_width":0,"radius":5,"bg_color":"#5a6173","text":"Timer3","text_color":"white","text_font":56}
