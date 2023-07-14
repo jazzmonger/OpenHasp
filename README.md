@@ -7,6 +7,7 @@ Features:
 - Pandora media player
 - American NWS Weather card (still needs tweaking)
 - MPP Solar Inverter card using Home Assistant integration
+- All 3 Alexa Timers
 
 Problems/To Do's:
 the weather page needs to be updated so that when evening rolls around, the forecast is actually for the nex DAY instead of all evenings.  That will take some logic in the yaml file.
@@ -18,3 +19,5 @@ the weather page needs to be updated so that when evening rolls around, the fore
 ![229256882-5d915549-f324-4265-89e1-462df258a670](https://user-images.githubusercontent.com/52110065/233684028-e267135e-87c4-459a-a335-661595e4727d.png)
 
 ![229256980-7e30de1f-ed8f-4d69-868a-44c06d539fd5](https://user-images.githubusercontent.com/52110065/233684007-d2a9b34f-b17f-4d17-a7c1-190f4f0729c0.png)
+
+![image](https://github.com/jazzmonger/OpenHasp/assets/52110065/29b408c3-43e4-44a7-8565-585d0af365ee)
