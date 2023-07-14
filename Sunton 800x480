@@ -1,6 +1,6 @@
 #ALL plates pull from this directory.  just change the plate name below to add another plate
 #Sunton 800x480
-plate02:
+largeplate:
   objects:
     - obj: "p0b4"
       properties:
@@ -49,27 +49,54 @@ plate02:
     - obj: "p1b11"
       properties:
         "text": "{{ states('sensor.battery_state_of_charge') | float(0) | round(0) }}%"
+
+    - obj: "p1b21"
+      properties:
+        "text": "1: {{ states('sensor.inverter_1_load_percentage') | float(0) | round(0) }}%"
+    - obj: "p1b22"
+      properties:
+        "text": "2: {{ states('sensor.inverter_2_load_percentage') | float(0) | round(0) }}%"
+
     - obj: "p1b12"
       properties:
-        "text": "\ue054{{ states('sensor.battery_power') | float(0) | round(0) }}W"
+        "text": >
+          {% if states('sensor.battery_power') |int <= 0  %}
+          {{"\ue04d"|e}}{{states('sensor.battery_power') | float(0) | round(0) |e }}w 
+          {%-else %}
+           {{"\ue054"|e}}{{ states('sensor.battery_power') | float(0) | round(0) }}w
+          {% endif %}
+        "text_color": "{% if states('sensor.battery_power') |int <= 0  %} red
+        {% else %}yellow
+        {% endif %}"     
+
     - obj: "p1b13"
       properties:
         "text": "{{ states('sensor.grid_power_2') | float(0)  / 1000 | round(0) }} kW"
-    # - obj: "p1b13"
-    #   properties:
-    #     "text": "wtf kW"
 
-    - obj: "p1b20"
-      properties:
-        "text": "temp"
-    - obj: "p1b40"
-      properties:
-        "max": "{{ states('sensor.energy_production_today') | float(0.001) * 1000 }}"
-        "val": "{{ states('sensor.solar_daily_yield') | int(0) }}"
+    # - obj: "p1b21"
+    #   properties:
+    #     "text: "{{ states('sensor.inverter_1_load_percentage') | float(0) | round(0) }}%"     
+
     - obj: "p1b41"
       properties:
-        "max": "{{ (states('sensor.daily_energy_export_total') | float(0.001) * 1000 + states('sensor.daily_energy_import_total') | float(1) * 1000) | int(0) }}"
-        "val": "{{ (states('sensor.daily_energy_export_total') | float(0.001) * 1000) | int(0) }}"
+        "value_str": >      
+          {% if states('sensor.battery_power') |int <= 0  %}
+          {{"\uF2A1"|e}} 
+          {%-else %}
+           {{"\uF2A3"|e}}
+          {% endif %}      
+        "value_color": "{% if states('sensor.battery_power') |int <= 0  %}red
+        {% else %}yellow
+        {% endif %}"        
+        "line_color": "{% if states('sensor.battery_power') |int <= 0  %}red
+        {% else %}yellow
+        {% endif %}"  
+
+    # - obj: "p1b21"
+    #   properties:
+    #     "text: "{{ states('sensor.inverter_1_load_percentage') | float(0) | round(0) }}"     
+
+
     - obj: "p1b42"
       properties:
         "max": "{{ (states('sensor.daily_energy_import_total') | float(0.001) * 1000 + states('sensor.daily_solar_consumption_total') | float *1000) | int(0) }}"
@@ -81,158 +108,158 @@ plate02:
 #
     - obj: "p2b14" # artist label
       properties:
-        "text": "{{ state_attr('media_player.kitchen_original','media_artist') if state_attr('media_player.kitchen_original','media_artist') else '-' }}"
+        "text": "{{ state_attr('media_player.shop','media_artist') if state_attr('media_player.shop','media_artist') else '-' }}"
 
     - obj: "p2b15" # title label
       properties:
-        "text": "{{ state_attr('media_player.kitchen_original','media_title') if state_attr('media_player.kitchen_original','media_title') else '-' }}"
+        "text": "{{ state_attr('media_player.shop','media_title') if state_attr('media_player.shop','media_title') else '-' }}"
 
     # - obj: "p3b15" # sources list
     #   properties:
     #     "options": >
-    #       {% if (state_attr('media_player.kitchen_original','source_list') != none and states('media_player.kitchen_original') not in ['unavailable', 'unknown']) %}
+    #       {% if (state_attr('media_player.shop','source_list') != none and states('media_player.shop') not in ['unavailable', 'unknown']) %}
     #       {{"(no source)\n"|e}}
-    #       {%- for source in state_attr('media_player.kitchen_original','source_list') -%}
+    #       {%- for source in state_attr('media_player.shop','source_list') -%}
     #       {{source+"\n"|e}}{%-if not loop.last%}{%-endif%}{%-endfor%}{%-endif %}
     #     "val": >
-    #       {% if states('media_player.kitchen_original') not in ['unavailable', 'unknown'] %}
-    #       {% if state_attr('media_player.kitchen_original','source') == None %}0{% else %}
-    #       {%for source in state_attr('media_player.kitchen_original','source_list')%}
-    #       {{loop.index if source == state_attr('media_player.kitchen_original','source') }}
+    #       {% if states('media_player.shop') not in ['unavailable', 'unknown'] %}
+    #       {% if state_attr('media_player.shop','source') == None %}0{% else %}
+    #       {%for source in state_attr('media_player.shop','source_list')%}
+    #       {{loop.index if source == state_attr('media_player.shop','source') }}
     #       {%-endfor%}{%-endif %}{%-endif %}
-    #     "click": "{{ 'false' if states('media_player.kitchen_original') in ['unavailable', 'unknown'] else 'true' }}"
+    #     "click": "{{ 'false' if states('media_player.shop') in ['unavailable', 'unknown'] else 'true' }}"
     #   event:
     #     "changed":
     #       - service: media_player.select_source
     #         data:
-    #           entity_id: media_player.kitchen_original
+    #           entity_id: media_player.shop
     #           source: "{{ text }}"
 
     # - obj: "p3b16" # sound modes list
     #   properties:
     #     "options": >
-    #       {% if (state_attr('media_player.kitchen_original','sound_mode_list') != none and states('media_player.kitchen_original') not in ['unavailable', 'unknown']) %}
-    #       {%-for soundmode in state_attr('media_player.kitchen_original','sound_mode_list')-%}
+    #       {% if (state_attr('media_player.shop','sound_mode_list') != none and states('media_player.shop') not in ['unavailable', 'unknown']) %}
+    #       {%-for soundmode in state_attr('media_player.shop','sound_mode_list')-%}
     #       {{soundmode+"\n"|e}}{%-if not loop.last%}{%-endif%}{%-endfor%}{%-endif %}
     #     "val": >
-    #       {% if states('media_player.kitchen_original') not in ['unavailable', 'unknown'] %}{%for source in state_attr('media_player.kitchen_original','sound_mode_list')%}
-    #       {{loop.index -1 if source == state_attr('media_player.kitchen_original','sound_mode') }}
+    #       {% if states('media_player.shop') not in ['unavailable', 'unknown'] %}{%for source in state_attr('media_player.shop','sound_mode_list')%}
+    #       {{loop.index -1 if source == state_attr('media_player.shop','sound_mode') }}
     #       {%-endfor%}{% endif %}
-    #     "click": "{{ 'false' if states('media_player.kitchen_original') in ['unavailable', 'unknown'] else 'true' }}"
+    #     "click": "{{ 'false' if states('media_player.shop') in ['unavailable', 'unknown'] else 'true' }}"
     #   event:
     #     "changed":
     #       - service: media_player.select_sound_mode
     #         data:
-    #           entity_id: media_player.kitchen_original
+    #           entity_id: media_player.shop
     #           sound_mode: "{{ text }}"
 
     - obj: "p2b17" # play/pause/stop
       properties:
         "text": >
-          {% if is_state('media_player.kitchen_original', 'playing') %}
+          {% if is_state('media_player.shop', 'playing') %}
           {{ "\uE3E4" | e }}
           {%-else %}
           {{ "\uE40A" | e }}
           {%-endif %}
-        "text_opa": "{{ '80' if states('media_player.kitchen_original') in ['unavailable', 'unknown'] else '255' }}"
+        "text_opa": "{{ '80' if states('media_player.shop') in ['unavailable', 'unknown'] else '255' }}"
       event:
         "down":
           - service: media_player.media_play_pause
             target:
-              entity_id: media_player.kitchen_original
+              entity_id: media_player.shop
         "long":
           - service: media_player.media_stop
             target:
-              entity_id: media_player.kitchen_original
+              entity_id: media_player.shop
 
     - obj: "p2b16" # prev
       properties:
-        "text_opa": "{{ '80' if states('media_player.kitchen_original') in ['unavailable', 'unknown'] else '255' }}"
+        "text_opa": "{{ '80' if states('media_player.shop') in ['unavailable', 'unknown'] else '255' }}"
       event:
         "down":
           - service: media_player.media_previous_track
             target:
-              entity_id: media_player.kitchen_original
+              entity_id: media_player.shop
 
     - obj: "p2b18" # next
       properties:
-        "text_opa": "{{ '80' if states('media_player.kitchen_original') in ['unavailable', 'unknown'] else '255' }}"
+        "text_opa": "{{ '80' if states('media_player.shop') in ['unavailable', 'unknown'] else '255' }}"
       event:
         "down":
           - service: media_player.media_next_track
             target:
-              entity_id: media_player.kitchen_original
+              entity_id: media_player.shop
 
     - obj: "p2b20" # volume slider
       properties:
         "val": >
-          {% if (state_attr('media_player.kitchen_original','volume_level') != none and states('media_player.kitchen_original') not in ['unavailable', 'unknown']) %}
-          {{ state_attr('media_player.kitchen_original','volume_level') * 100 | int(default=40) }}
+          {% if (state_attr('media_player.shop','volume_level') != none and states('media_player.shop') not in ['unavailable', 'unknown']) %}
+          {{ state_attr('media_player.shop','volume_level') * 100 | int(default=40) }}
           {%-endif %}
-        "click": "{{ 'false' if states('media_player.kitchen_original') in ['unavailable', 'unknown'] else 'true' }}"
+        "click": "{{ 'false' if states('media_player.shop') in ['unavailable', 'unknown'] else 'true' }}"
       event:
         "changed":
           - service: media_player.volume_set
             data:
-              entity_id: media_player.kitchen_original
+              entity_id: media_player.shop
               volume_level: "{{ val | int / 100 }}"
         "up":
           - service: media_player.volume_set
             data:
-              entity_id: media_player.kitchen_original
+              entity_id: media_player.shop
               volume_level: "{{ val | int / 100 }}"
 
     # - obj: "p3b21" # power
     #   properties:
-    #     "text_color": "{{ '#B00000' if states('media_player.kitchen_original') == 'off' else '#FFFFFF' }}"
-    #     "text_opa": "{{ '80' if states('media_player.kitchen_original') in ['unavailable', 'unknown'] else '255' }}"
+    #     "text_color": "{{ '#B00000' if states('media_player.shop') == 'off' else '#FFFFFF' }}"
+    #     "text_opa": "{{ '80' if states('media_player.shop') in ['unavailable', 'unknown'] else '255' }}"
     #   event:
     #     "down":
     #       - service: media_player.toggle
     #         data:
-    #           entity_id: media_player.kitchen_original
+    #           entity_id: media_player.shop
 
     # - obj: "p3b22" # repeat
     #   properties:
     #     "text": >
-    #       {% if is_state_attr('media_player.kitchen_original', 'repeat', 'one') %}
+    #       {% if is_state_attr('media_player.shop', 'repeat', 'one') %}
     #       {{ "\uE458" | e }}
-    #       {% elif is_state_attr('media_player.kitchen_original', 'repeat', 'all') %}
+    #       {% elif is_state_attr('media_player.shop', 'repeat', 'all') %}
     #       {{ "\uE456" | e }}
     #       {%-else %}
     #       {{ "\uE457" | e }}
     #       {%-endif %}
-    #     "text_opa": "{{ '80' if states('media_player.kitchen_original') in ['unavailable', 'unknown'] else '255' }}"
+    #     "text_opa": "{{ '80' if states('media_player.shop') in ['unavailable', 'unknown'] else '255' }}"
     #   event:
     #     "down":
     #       - service: media_player.repeat_set
     #         data:
-    #           entity_id: media_player.kitchen_original
+    #           entity_id: media_player.shop
     #           repeat: >
-    #             {% if is_state_attr('media_player.kitchen_original', 'repeat', 'one') %}
+    #             {% if is_state_attr('media_player.shop', 'repeat', 'one') %}
     #             all
-    #             {% elif is_state_attr('media_player.kitchen_original', 'repeat', 'all') %}
+    #             {% elif is_state_attr('media_player.shop', 'repeat', 'all') %}
     #             off
-    #             {% elif is_state_attr('media_player.kitchen_original', 'repeat', 'off') %}
+    #             {% elif is_state_attr('media_player.shop', 'repeat', 'off') %}
     #             one
     #             {%-endif %}
 
     # - obj: "p3b23" # shuffle
     #   properties:
     #     "text": >
-    #       {% if state_attr('media_player.kitchen_original', 'shuffle') %}
+    #       {% if state_attr('media_player.shop', 'shuffle') %}
     #       {{ "\uE49D" | e }}
     #       {%-else %}
     #       {{ "\uE49E" | e }}
     #       {%-endif %}
-    #     "text_opa": "{{ '80' if states('media_player.kitchen_original') in ['unavailable', 'unknown'] else '255' }}"
+    #     "text_opa": "{{ '80' if states('media_player.shop') in ['unavailable', 'unknown'] else '255' }}"
     #   event:
     #     "down":
     #       - service: media_player.shuffle_set
     #         data:
-    #           entity_id: media_player.kitchen_original
+    #           entity_id: media_player.shop
     #           shuffle:  >
-    #             {% if state_attr('media_player.kitchen_original', 'shuffle') %}
+    #             {% if state_attr('media_player.shop', 'shuffle') %}
     #             false
     #             {% else %}
     #             true
@@ -241,19 +268,19 @@ plate02:
     - obj: "p2b24" # mute
       properties:
         "text": >
-          {% if state_attr('media_player.kitchen_original', 'is_volume_muted') %}
+          {% if state_attr('media_player.shop', 'is_volume_muted') %}
           {{ "\uE75F" | e }}
           {%-else %}
           {{ "\uE57E" | e }}
           {%-endif %}
-        "text_opa": "{{ '80' if states('media_player.kitchen_original') in ['unavailable', 'unknown'] else '255' }}"
+        "text_opa": "{{ '80' if states('media_player.shop') in ['unavailable', 'unknown'] else '255' }}"
       event:
         "down":
           - service: media_player.volume_mute
             data:
-              entity_id: media_player.kitchen_original
+              entity_id: media_player.shop
               is_volume_muted:  >
-                {% if state_attr('media_player.kitchen_original', 'is_volume_muted') %}
+                {% if state_attr('media_player.shop', 'is_volume_muted') %}
                 false
                 {% else %}
                 true
@@ -454,7 +481,7 @@ plate02:
       properties:
         "options": "{% for mode in state_attr('select.esph_house_power_select', 'options') %}
         {{ mode }}\n{% endfor %}"       
-        "click": "{{ 'false' if (is_state('input_select.zigbee2mqtt_log_level','unavailable') or is_state('climate.house_wood_pellet_stove','unknown')) else 'true' }}"
+        "click": "{{ 'false' if (is_state('climate.house_wood_pellet_stove','unavailable') or is_state('climate.house_wood_pellet_stove','unknown')) else 'true' }}"
         "val": >
           {% for mode in state_attr('select.esph_house_power_select', 'options') %}
             {{ loop.index -1 if mode == states('select.esph_house_power_select') }}
@@ -707,3 +734,67 @@ plate02:
           L:/z-32-{{ state_attr('weather.keul_daynight','forecast')[8]['condition'] }}.png
           {%- endif %}
         "zoom": "350"            
+        
+#Alexa Timers
+    - obj: "p5b9"  # timer 1
+      properties:
+        "text": >
+          {% if states('sensor.alexa_timer_1') is not none %}
+            {{ states('sensor.alexa_timer_1') }}
+          {%- endif %}
+          "opacity": "{{ 60 if (is_state('sensor.alexa_timer_1','unavailable') or is_state('sensor.alexa_timer_1','unknown')) else 255 }}"
+    - obj: "p5b1"  # timer 1 name
+      properties:
+        "text": >
+          {% if state_attr('sensor.alexa_timer_1','label') is not none %}
+          {{ state_attr('sensor.alexa_timer_1','label') }}
+          {% else -%}
+          No Name
+          {%- endif %}
+    - obj: "p5b10"  # timer 2
+      properties:
+        "text": >
+          {% if states('sensor.alexa_timer_2') is not none %}
+            {{ states('sensor.alexa_timer_2') }}
+          {%- endif %}
+          "opacity": "{{ 60 if (is_state('sensor.alexa_timer_2','unavailable') or is_state('sensor.alexa_timer_2','unknown')) else 255 }}"
+    - obj: "p5b2"  # timer 2 name
+      properties:
+        "text": >
+          {% if state_attr('sensor.alexa_timer_2','label') is not none %}
+          {{ state_attr('sensor.alexa_timer_2','label') }}
+          {% else -%}
+          No Name
+          {%- endif %}     
+    - obj: "p5b11"  # timer 3
+      properties:
+        "text": >
+          {% if states('sensor.alexa_timer_3') is not none %}
+            {{ states('sensor.alexa_timer_3') }}
+          {%- endif %}
+          "opacity": "{{ 60 if (is_state('sensor.alexa_timer_3','unavailable') or is_state('sensor.alexa_timer_3','unknown')) else 255 }}"
+    - obj: "p5b3"  # timer 3 name
+      properties:
+        "text": >
+          {% if state_attr('sensor.alexa_timer_3','label') is not none %}
+          {{ state_attr('sensor.alexa_timer_3','label') }}
+          {% else -%}
+          No Name          
+          {%- endif %}
+    - obj: "p5b12"  # cancel ALL timers  
+      properties:      
+       "click": "{{ 'false' if states('media_player.shop') in ['unavailable', 'unknown'] else 'true' }}"
+       "text": >
+          {% if states('sensor.alexa_timer_1') is not none %}
+            Cancel ALL Timers
+          {% else -%}
+            Alexa Timers   
+          {%- endif %}  
+      event:
+        "down":
+          - service: media_player.play_media
+            target:
+              entity_id: media_player.shop
+            data:
+              media_content_type: custom
+              media_content_id: 'cancel all timers'                      
